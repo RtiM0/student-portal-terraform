@@ -15,11 +15,6 @@ data "archive_file" "lambda_file" {
   output_path = "${path.module}/output/student-portal-api.zip"
 }
 
-resource "local_file" "env" {
-  content  = "USERPOOL_ID = '${var.userpool_id}'\nSTUDENTS_TABLE = '${var.table_name}'"
-  filename = "${path.module}/student-portal-api/.env"
-}
-
 resource "aws_s3_object" "lambda_student_portal" {
   bucket = aws_s3_bucket.lambda_bucket.id
 
@@ -40,6 +35,13 @@ resource "aws_lambda_function" "student_portal_api" {
 
   source_code_hash = data.archive_file.lambda_file.output_base64sha256
   role             = var.iam_arn
+
+  environment {
+    variables = {
+      "USERPOOL_ID"    = var.userpool_id,
+      "STUDENTS_TABLE" = var.table_name
+    }
+  }
 }
 
 resource "aws_cloudwatch_log_group" "student_portal_api" {

@@ -9,8 +9,6 @@ This project deploys the backend of student-portal with Terraform.
 ```bash
 $ terraform init
 $ terraform apply
-# Apply again to inject .env containing resource ids into the lambda
-$ terraform apply
 ```
 
 ---
