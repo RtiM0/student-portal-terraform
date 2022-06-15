@@ -15,6 +15,11 @@ data "archive_file" "lambda_file" {
   output_path = "${path.module}/output/student-portal-api.zip"
 }
 
+resource "local_file" "env" {
+  content  = "USERPOOL_ID = '${var.userpool_id}'\nSTUDENTS_TABLE = '${var.table_name}'"
+  filename = "${path.module}/student-portal-api/.env"
+}
+
 resource "aws_s3_object" "lambda_student_portal" {
   bucket = aws_s3_bucket.lambda_bucket.id
 

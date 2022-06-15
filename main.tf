@@ -45,6 +45,8 @@ module "lambda" {
   iam_arn       = module.iam-role.iam_arn
   bucket_name   = random_pet.name.id
   function_name = random_pet.name.id
+  userpool_id   = module.cognito-userpool.userpool_id
+  table_name    = "students-table-${random_pet.name.id}"
 }
 
 module "api-gateway" {

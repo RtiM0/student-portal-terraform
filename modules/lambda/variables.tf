@@ -9,3 +9,11 @@ variable "bucket_name" {
 variable "function_name" {
   description = "Lambda function name"
 }
+
+variable "userpool_id" {
+  description = "Cognito UserPool ID"
+}
+
+variable "table_name" {
+  description = "DynamoDB Table Name"
+}
