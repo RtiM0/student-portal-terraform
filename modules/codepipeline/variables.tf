@@ -37,3 +37,7 @@ variable "source_bucket_name" {
 variable "source_bucket_arn" {
   description = "Destination Bucket ARN"
 }
+
+variable "codebuild_name" {
+  description = "Name of the CodeBuild project"
+}

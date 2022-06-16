@@ -66,6 +66,13 @@ module "cloudfront" {
   bucket_name = "student-portal-${random_pet.name.id}"
 }
 
+module "codebuild" {
+  source = "./modules/codebuild"
+
+  codebuild_name = "${random_pet.name.id}-build"
+  source_repo    = var.frontend_repo_path
+}
+
 module "codepipeline" {
   source = "./modules/codepipeline"
 
@@ -79,4 +86,5 @@ module "codepipeline" {
   source_bucket_name  = "student-portal-${random_pet.name.id}"
   source_bucket_arn   = module.cloudfront.bucket_arn
   source_repo_branch  = var.frontend_repo_branch
+  codebuild_name      = "${random_pet.name.id}-build"
 }

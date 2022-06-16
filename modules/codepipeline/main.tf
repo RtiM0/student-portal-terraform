@@ -44,7 +44,7 @@ resource "aws_codepipeline" "codepipeline" {
       version          = "1"
 
       configuration = {
-        "ProjectName" = "student-portal-build"
+        "ProjectName" = var.codebuild_name
         "EnvironmentVariables" = jsonencode([
           {
             "name" : "REACT_APP_USERPOOLID",
