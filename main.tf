@@ -69,8 +69,8 @@ module "cloudfront" {
 module "codepipeline" {
   source = "./modules/codepipeline"
 
-  pipeline_name       = "student-portal-pipeline"
-  source_repo         = "RtiM0/student-portal"
+  pipeline_name       = "${random_pet.name.id}-pipeline"
+  source_repo         = var.frontend_repo_path
   userpool_id         = module.cognito-userpool.userpool_id
   userpool_client_id  = module.cognito-userpool.userpool_client_id
   api_endpoint        = module.api-gateway.base_url
@@ -78,5 +78,5 @@ module "codepipeline" {
   region              = var.region
   source_bucket_name  = "student-portal-${random_pet.name.id}"
   source_bucket_arn   = module.cloudfront.bucket_arn
-  source_repo_branch  = "master"
+  source_repo_branch  = var.frontend_repo_branch
 }
