@@ -3,7 +3,18 @@
 
 This project deploys the backend of student-portal with Terraform.
 
-*Total Resources: 24*
+# Stack deployed
+- Cognito UserPool
+- DynamoDB Table
+- IAM Roles
+- Lambda function with API
+- API Gateway that invokes the API Lambda function 
+- CodeBuild project
+- CodePipeline which:
+	- Monitors frontend repo as a source
+	- Builds the repo with environment variables from the stack 
+	- Deploys the build into a s3 bucket
+- CloudFront Distribution for the s3 bucket
 
 # Install
 ```bash
