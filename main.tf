@@ -60,8 +60,23 @@ module "api-gateway" {
   userpool_region      = var.region
 }
 
-# module "cloudfront" {
-#   source = "./modules/cloudfront"
+module "cloudfront" {
+  source = "./modules/cloudfront"
 
-#   bucket_name = "student-portal-${random_pet.name.id}"
-# }
+  bucket_name = "student-portal-${random_pet.name.id}"
+}
+
+module "codepipeline" {
+  source = "./modules/codepipeline"
+
+  pipeline_name       = "student-portal-pipeline"
+  source_repo         = "RtiM0/student-portal"
+  userpool_id         = module.cognito-userpool.userpool_id
+  userpool_client_id  = module.cognito-userpool.userpool_client_id
+  api_endpoint        = module.api-gateway.base_url
+  production_endpoint = module.cloudfront.cloudfront_url
+  region              = var.region
+  source_bucket_name  = "student-portal-${random_pet.name.id}"
+  source_bucket_arn   = module.cloudfront.bucket_arn
+  source_repo_branch  = "master"
+}

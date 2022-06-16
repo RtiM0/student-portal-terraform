@@ -17,22 +17,22 @@ resource "aws_s3_bucket_public_access_block" "public_access" {
   restrict_public_buckets = false
 }
 
-module "template_files" {
-  source   = "hashicorp/dir/template"
-  base_dir = "${path.module}/build"
-}
+# module "template_files" {
+#   source   = "hashicorp/dir/template"
+#   base_dir = "${path.module}/build"
+# }
 
-resource "aws_s3_object" "s3_object" {
-  for_each = module.template_files.files
+# resource "aws_s3_object" "s3_object" {
+#   for_each = module.template_files.files
 
-  bucket       = aws_s3_bucket.app_bucket.id
-  key          = each.key
-  content_type = each.value.content_type
-  source       = each.value.source_path
-  content      = each.value.content
+#   bucket       = aws_s3_bucket.app_bucket.id
+#   key          = each.key
+#   content_type = each.value.content_type
+#   source       = each.value.source_path
+#   content      = each.value.content
 
-  etag = each.value.digests.md5
-}
+#   etag = each.value.digests.md5
+# }
 
 resource "aws_s3_bucket_website_configuration" "static_hosting" {
   bucket = aws_s3_bucket.app_bucket.id
