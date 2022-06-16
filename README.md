@@ -6,8 +6,8 @@ This project deploys the backend of student-portal with Terraform.
 # Stack deployed
 - Cognito UserPool
 - DynamoDB Table
-- IAM Roles
 - Lambda function with API
+- IAM Role for Lambda
 - API Gateway that invokes the API Lambda function 
 - CodeBuild project
 - CodePipeline which:
@@ -93,7 +93,7 @@ $ terraform apply
 
   
 
-- To create user accounts with Cognito Group assignment
+	- To create user accounts with Cognito Group assignment
 
   
 
@@ -101,7 +101,7 @@ $ terraform apply
 
   
 
-- To run the NodeJS code to interact with DynamoDB
+	- To run the NodeJS code to interact with DynamoDB
 
   
 
@@ -109,7 +109,7 @@ $ terraform apply
 
   
 
-- To save the Student detail
+	- To save the Student detail
 
   
 
@@ -117,4 +117,4 @@ $ terraform apply
 
   
 
-- To host the UI for interacting with the system
+	- To host the UI for interacting with the system
