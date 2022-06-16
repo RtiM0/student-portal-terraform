@@ -60,8 +60,8 @@ module "api-gateway" {
   userpool_region      = var.region
 }
 
-module "cloudfront" {
-  source = "./modules/cloudfront"
+# module "cloudfront" {
+#   source = "./modules/cloudfront"
 
-  bucket_name = "student-portal-${random_pet.name.id}"
-}
+#   bucket_name = "student-portal-${random_pet.name.id}"
+# }
